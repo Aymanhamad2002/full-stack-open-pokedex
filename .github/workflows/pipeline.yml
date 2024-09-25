@@ -32,7 +32,7 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify on success
-        uses: hunghg255/action-notifications@v1
+        uses: hunghg255/action-notifications@master
         if: ${{ success() && github.event_name == 'push' }}
         with:
           discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -40,7 +40,7 @@ jobs:
           description: "Test here: https://full-stack-open-pokedex-j79i.onrender.com/version"
 
       - name: Notify on failure
-        uses: hunghg255/action-notifications@v1
+        uses: hunghg255/action-notifications@master
         if: ${{ failure() }}
         with:
           discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
