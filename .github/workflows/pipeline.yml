@@ -39,8 +39,8 @@ jobs:
           severity: info
           username: CustomUsername
           description: Deploy succeeded!
-          details: Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman
-          text: New deploy
+          details: 'Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman'
+          text: New deploy.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK}}
           
       - name: Notify on failure
@@ -50,8 +50,8 @@ jobs:
           severity: error
           username: CustomUsername
           description: Something went wrong!
-          details: "Commit link: https://github.com/${{ github.repository }}/commit/${{ github.sha }} broke the build."
-          text: Build failed
+          details: 'Commit link: https://github.com/${{ github.repository }}/commit/${{ github.sha }} broke the build.'
+          text: Build failed.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK}}
 
   tag_release:
