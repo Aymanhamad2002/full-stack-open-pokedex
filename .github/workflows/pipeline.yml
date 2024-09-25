@@ -32,25 +32,22 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify on success
-        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ success() && github.event_name == 'push' }}
+        uses: Ilshidur/action-discord@2.0.1
         with:
-          severity: info
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Deploy succeeded! Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman"
           username: CustomUsername
-          description: Deploy succeeded!
-          details: 'Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman'
-          text: New deploy.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK}}
+          avatar-url: 'https://path/to/avatar.png' # optional
+
       - name: Notify on failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ failure() }}
+        uses: Ilshidur/action-discord@2.0.1
         with:
-          severity: error
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Something went wrong! Commit link: https://github.com/${{ github.repository }}/commit/${{ github.sha }} broke the build."
           username: CustomUsername
-          description: Something went wrong!
-          details: 'Commit link: https://github.com/${{ github.repository }}/commit/${{ github.sha }} broke the build.'
-          text: Build failed.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK}}
+
 
   tag_release:
     needs: [simple_deployment_pipeline]
