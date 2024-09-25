@@ -37,9 +37,7 @@ jobs:
         with:
           severity: info
           username: CustomUsername
-          description: Deploy succeeded!
           details: 'Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman'
-          text: New deploy.
           webhookUrl: https://study.cs.helsinki.fi/discord/webhooks/${{secrets.DISCORD_WEBHOOK}}
       - name: Notify on failure
         uses: rjstone/discord-webhook-notify@v1.0.4
@@ -47,9 +45,7 @@ jobs:
         with:
           severity: error
           username: CustomUsername
-          description: Something went wrong!
           details: 'Commit link: https://github.com/${{ github.repository }}/commit/${{ github.sha }} broke the build.'
-          text: Build failed.
           webhookUrl: https://study.cs.helsinki.fi/discord/webhooks/${{ secrets.DISCORD_WEBHOOK}}
 
 
