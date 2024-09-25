@@ -31,7 +31,7 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-      - name: Notify on success
+   - name: Notify on success
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ success() && github.event_name == 'push' }}
         with:
@@ -40,7 +40,7 @@ jobs:
           description: Deploy succeeded!
           details: 'Deployed to https://full-stack-open-pokedex-j79i.onrender.com/version by Ayman'
           text: New deploy.
-          webhookUrl:https://study.cs.helsinki.fi/discord/webhooks/${{secrets.DISCORD_WEBHOOK}}
+          webhookUrl: https://study.cs.helsinki.fi/discord/webhooks/${{secrets.DISCORD_WEBHOOK}}
       - name: Notify on failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ failure() }}
